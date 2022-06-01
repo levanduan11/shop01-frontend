@@ -1,0 +1,30 @@
+<div class="container-fluid bg-light" style="min-height: 78vh; padding: 100px;">
+  <div *ngIf="isLoad">
+    <p class="text-warning text-danger">please waiting for file up loading... </p>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <div>
+    <div *ngIf="error_message" class="alert alert-danger text-center" role="alert">
+      {{error_message}}
+    </div>
+  </div>
+  <div *ngIf="downloadURL" style="text-align: center;">
+    <img [src]="downloadURL" class="img-thumbnail">
+  </div>
+
+<mat-card style="width: 700px;padding: 40px;margin: 20px auto;">
+  <div class="input-group mb-3" style="width: 579px;margin:  auto;">
+    <input type="file" class="form-control" (change)="onFileChanged($event)">
+    <div class="input-group-append">
+      <button matTooltip="upload file" [disabled]="!isUpLoadFile" class="btn btn-danger" type="button" (click)="onUpload()">upload</button>
+      <button matTooltip="update" [disabled]="!downloadURL"  (click)="onUpdateImageUrl()" type="button" class="btn btn-primary">update</button>
+      <button matTooltip="cancel" type="button" (click)="onPre()"class="btn btn-success">cancel</button>
+    </div>
+  </div>
+
+</mat-card>
+
+<button id="btn-toast" style="display: none;" mat-stroked-button (click)="openSnackBar()">
+
+</button>
+</div>

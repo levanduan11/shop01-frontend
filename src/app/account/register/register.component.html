@@ -1,0 +1,64 @@
+<div class="container p-3" style="min-height: 79vh;">
+  <mat-card>
+    <div *ngIf="messageError" class="alert alert-danger text-center" role="alert">
+      {{messageError}}
+    </div>
+    <div *ngIf="successMessage" class="alert alert-success text-center" role="alert">
+      {{successMessage}}
+    </div>
+    <form style="width: 400px;margin: 0 auto;" [formGroup]="formRegis" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>username</label>
+        <input #username type="text" class="form-control" (blur)="onBlur($event,username.name)" name="username"
+          formControlName="username">
+        <small class="form-message text-danger"></small>
+
+      </div>
+      <div class="form-group">
+        <label>first name</label>
+        <input #firstName type="text" class="form-control" (blur)="onBlur($event,firstName.name)" name="firstName"
+          formControlName="firstName">
+        <small class="form-message text-danger"></small>
+
+      </div>
+      <div class="form-group">
+        <label>last name</label>
+        <input #lastName type="text" class="form-control" (blur)="onBlur($event,lastName.name)" name="lastName"
+          formControlName="lastName">
+        <small class="form-message text-danger"></small>
+
+      </div>
+      <div class="form-group">
+        <label>email</label>
+        <input #email type="email" class="form-control" (blur)="onBlur($event,email.name)" name="email"
+          formControlName="email">
+
+        <small class="form-message text-danger"></small>
+
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input #password type="password" class="form-control" (blur)="onBlur($event,password.name)" name="password"
+          formControlName="password">
+        <small class="form-message text-danger"></small>
+
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input #confirmPassword type="password" class="form-control" (blur)="onBlur($event,confirmPassword.name)"
+          name="confirmPassword" formControlName="confirmPassword">
+        <small class="form-message text-danger"></small>
+        <small *ngIf="notMatch" class=" text-danger">password not match</small>
+      </div>
+
+
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button [disabled]="!formRegis.valid" type="submit" class="btn btn-success">register</button>
+        <button type="button" (click)="onPre()" class="btn btn-danger">cancel</button>
+        <button *ngIf="successMessage" type="button" routerLink="/login" class="btn btn-primary">Login For now</button>
+      </div>
+    </form>
+
+  </mat-card>
+</div>
