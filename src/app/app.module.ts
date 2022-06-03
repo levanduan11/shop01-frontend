@@ -13,12 +13,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './core/interceptor';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SharedModule } from './shared/shared.module';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, HeaderComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    FooterComponent,
+    HeaderComponent,
+    HomeComponent,
+    
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,7 +35,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     HttpClientModule,
     MatIconModule,
     MatTooltipModule,
+    SharedModule,
   ],
+
+
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })

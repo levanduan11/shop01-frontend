@@ -4,6 +4,8 @@ import { CategoryListComponent } from '../category-list/category-list.component'
 import { CategoryUpdateComponent } from '../update/update.component';
 import { CategoryDetailComponent } from '../detail/detail.component';
 import { CanActivationService } from 'src/app/core/auth/can-activation.service';
+import { CategoryRoutingResolveService } from './category-routing-resolve-alias.service';
+import { CategoryRoutingResolveIdService } from './category-routing-resolve-id.service';
 
 const categoryRoutes: Routes = [
   {
@@ -23,12 +25,18 @@ const categoryRoutes: Routes = [
     component: CategoryUpdateComponent,
     data: { title: 'category-edit' },
     canActivate: [CanActivationService],
+    resolve: {
+      category:CategoryRoutingResolveIdService
+    }
   },
   {
-    path: ':id/view',
+    path: ':alias/view',
     component: CategoryDetailComponent,
     data: { title: 'category-view' },
     canActivate: [CanActivationService],
+    resolve: {
+      category:CategoryRoutingResolveService
+    }
   },
   {
     path: ':id/delete',

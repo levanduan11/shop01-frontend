@@ -28,7 +28,7 @@ export class UploadImageComponent implements OnInit {
   error_message = '';
   isUpLoadFile = false;
   uploadModel: UploadImageUrl = new UploadImageUrl();
-  
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   upload_status_message = '';

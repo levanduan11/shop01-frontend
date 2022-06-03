@@ -3,7 +3,7 @@
 
     <h3 class="text-success">Spring</h3>
   </a>
-  <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+  <button class="navbar-toggler bg-dark d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
     aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -12,19 +12,19 @@
 
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
       <li class="nav-item ">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/user"><strong>User</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "   routerLink="/user"><strong>User</strong> </a>
       </li>
       <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' " routerLink="/customer"><strong>Customer</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/customer"><strong>Customer</strong> </a>
       </li>
       <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' " routerLink="/category"><strong>Category</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/category"><strong>Category</strong> </a>
       </li>
       <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' " routerLink="/brand"><strong>Brand</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/brand"><strong>Brand</strong> </a>
       </li>
       <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' " routerLink="/product"><strong>Product</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/product"><strong>Product</strong> </a>
       </li>
       <li *ngIf="checkLogin" class="nav-item">
         <a class="nav-link text-info" routerLink="/profile" matTooltip="view info">

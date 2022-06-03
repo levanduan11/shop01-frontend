@@ -27,9 +27,15 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { UploadImageEntityComponent } from '../entities/up-load/upload-image-entity/upload-image-entity.component';
 
 @NgModule({
-  imports: [AngularFireModule.initializeApp(environment.firebaseConfig)],
+  declarations: [UploadImageEntityComponent],
+  imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    MatProgressBarModule,
+    CommonModule,
+  ],
   exports: [
     MatInputModule,
     FormsModule,
@@ -56,6 +62,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatTreeModule,
+    UploadImageEntityComponent,
   ],
 })
 export class SharedLibsModule {}

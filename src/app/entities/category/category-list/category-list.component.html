@@ -3,7 +3,9 @@
     <mat-card style="width: 500px;margin:20px auto;">
         <h3 class="text-center text-secondary">Category List Manager</h3>
     </mat-card>
+    <button routerLink="new"class="mb-2" mat-raised-button color="primary">Create Category</button>
     <mat-card>
+
       <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
 
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>

@@ -1,3 +1,55 @@
-<p>
-  update works!
-</p>
+<div class="container-fluid bg-light">
+
+  <div class="container p-4">
+    <mat-card class="">
+      <mat-card style="margin:10px auto;width: 400px;">
+        <h4 class="text-center text-secondary">{{actionMessage}}</h4>
+
+      </mat-card>
+
+      <form [formGroup]="formEdit" action="" (submit)="onSubmit()" style="width:400px ;margin: auto;">
+        <input type="hidden" formControlName="id">
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Category Name</mat-label>
+          <input #name matInput formControlName="name" name="name">
+          <mat-error *ngIf="errorHandling('name', 'required')">
+            Category name is required
+          </mat-error>
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Alias</mat-label>
+          <input matInput formControlName="alias" name="alias">
+        </mat-form-field>
+        <div class="form-group">
+          <img *ngIf="!urlImage&&!isUpdate" src="../../../../assets/images/default-category.png" class="img-thumbnail m-2"
+            style="width: 150px;">
+          <img *ngIf="urlImage" [src]="urlImage" class="img-thumbnail" alt="category-image">
+          <img *ngIf="isUpdate&&imageUpdate&&!urlImage" [src]="imageUpdate" class="img-thumbnail">
+          <label *ngIf="!urlImage&&!isUpdate">Not choose image</label>
+          <upload-image-entity [categoryName]="name.value" (shareURL)="onGiveUrl($event)"></upload-image-entity>
+        </div>
+        <div class="form-group form-check">
+          <mat-checkbox formControlName="enabled">enabled</mat-checkbox>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <p>choose parent</p>
+            <select matNativeControl formControlName="parent_id">
+              <option [value]="null">[No Choose]</option>
+              <option *ngFor="let ca of categoryForNews" [value]="ca?.id"> {{ca.name}}</option>
+            </select>
+          </mat-form-field>
+        </div>
+
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button [style]="(formEdit.valid)? 'cursor:pointer;':'cursor: not-allowed'" [disabled]="!formEdit.valid"
+            type="submit" class="btn btn-primary">save</button>
+          <button (click)="onPrevious()" type="button" class="btn btn-danger">cancel</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+
+</div>
