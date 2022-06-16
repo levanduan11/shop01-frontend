@@ -1,7 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-white bg-white   shadow">
+<nav class="navbar navbar-expand-lg navbar-white shadow" style="background-color:#c25211;">
   <a class="navbar-brand" routerLink="/">
-
-    <h3 class="text-success">Spring</h3>
+    <img style="width:55px ;" class="rounded-circle" src="../../../assets/images/logo.png">
   </a>
   <button class="navbar-toggler bg-dark d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
     aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,44 +11,31 @@
 
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
       <li class="nav-item ">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "   routerLink="/user"><strong>User</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/user">User </a>
       </li>
       <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/customer"><strong>Customer</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/customer">Customer </a>
       </li>
       <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/category"><strong>Category</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/category">Category </a>
       </li>
       <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/brand"><strong>Brand</strong> </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/brand">Brand </a>
       </li>
       <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-secondary':'text-danger nav-link disabled' "  routerLink="/product"><strong>Product</strong> </a>
-      </li>
-      <li *ngIf="checkLogin" class="nav-item">
-        <a class="nav-link text-info" routerLink="/profile" matTooltip="view info">
-          <strong>{{username}}</strong>
-        </a>
-      </li>
-      <li *ngIf="checkLogin" class="nav-item">
-        <a class="nav-link text-secondary" matTooltip="change avatar" routerLink="/upload-image">
-          <!-- <img style="width:25px ;" *ngIf="!imageURL" src="../../../assets/images/user-upload.png"> -->
-          <img class="rounded-circle"  *ngIf="imageURL" style="width:35px ;" [src]="imageURL">
-        </a>
+        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/product">Product </a>
       </li>
 
 
-      <li *ngIf="checkLogin" class="nav-item">
-        <button matTooltip="logout" class="btn btn-light" (click)="onLogout($event)">
-          <mat-icon class="text-info"> logout </mat-icon>
-        </button>
-      </li>
 
-      <li *ngIf="!checkLogin" class="nav-item dropdown">
-        <a class="nav-link text-secondary dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
+
+
+    </ul>
+    <ul *ngIf="!checkLogin" class="navbar-nav" style="margin-right:100px ;">
+      <li class="nav-item dropdown">
+        <a class="nav-link text-white dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <strong>Account</strong>
-
+         Account
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownId">
           <a class="dropdown-item" routerLink="/login">Login</a>
@@ -58,7 +44,25 @@
       </li>
 
     </ul>
+    <ul *ngIf="checkLogin" class="navbar-nav" style="margin-right:100px ;">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" matTooltip="change avatar" routerLink="/upload-image">
+            <img class="rounded" *ngIf="imageURL" style="width:50px ;" [src]="imageURL">
+          </a>
 
+          <a class="dropdown-item" routerLink="/profile" matTooltip="view info">
+            view info
+          </a>
+          <a class="dropdown-item" matTooltip="logout" (click)="onLogout($event)">
+            <mat-icon class="text-info"> logout </mat-icon>
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>
-

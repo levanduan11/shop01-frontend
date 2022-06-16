@@ -5,6 +5,7 @@ import { ProductDetailComponent } from '../detail/detail.component';
 import { ProductDeleteComponent } from '../delete/delete.component';
 import { NgModule } from '@angular/core';
 import { CanActivationService } from 'src/app/core/auth/can-activation.service';
+import { ProductRoutingResolveService } from './product-routing-resolve.service';
 
 const productRouter: Routes = [
   {
@@ -24,12 +25,18 @@ const productRouter: Routes = [
     component: ProductUpdateComponent,
     data: { title: 'product-edit' },
     canActivate: [CanActivationService],
+    resolve: {
+      product: ProductRoutingResolveService,
+    },
   },
   {
     path: ':id/view',
     component: ProductDetailComponent,
     data: { title: 'product-view' },
     canActivate: [CanActivationService],
+    resolve: {
+      product: ProductRoutingResolveService,
+    },
   },
   {
     path: ':id/delete',
@@ -41,8 +48,8 @@ const productRouter: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(productRouter)],
-  exports:[RouterModule]
+  exports: [RouterModule]
 })
-export class ProductRoutingModule{
+export class ProductRoutingModule {
 
 }

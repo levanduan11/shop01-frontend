@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IBrand } from '../model/brand.model';
 
 @Component({
   selector: 'brand-detail',
@@ -6,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detail.component.css'],
 })
 export class BrandDetailComponent implements OnInit {
-  constructor() {}
+  brand: IBrand | null = null;
+  constructor(private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.activatedRoute.data.subscribe({
+      next: ({ brand }) => {
+        this.brand = brand;
+      },
+    });
+  }
+  onPre(): void {
+    window.history.back();
+  }
 }

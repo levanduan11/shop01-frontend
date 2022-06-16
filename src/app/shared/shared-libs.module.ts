@@ -18,6 +18,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatListModule } from '@angular/material/list';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -63,6 +67,10 @@ import { UploadImageEntityComponent } from '../entities/up-load/upload-image-ent
     MatProgressBarModule,
     MatTreeModule,
     UploadImageEntityComponent,
+    MatListModule,
+    MatStepperModule,
+    MatSidenavModule,
+    MatTabsModule,
   ],
 })
 export class SharedLibsModule {}

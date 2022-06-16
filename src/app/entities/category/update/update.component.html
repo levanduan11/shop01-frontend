@@ -22,12 +22,12 @@
           <input matInput formControlName="alias" name="alias">
         </mat-form-field>
         <div class="form-group">
-          <img *ngIf="!urlImage&&!isUpdate" src="../../../../assets/images/default-category.png" class="img-thumbnail m-2"
+          <img *ngIf="(!urlImage)&&(isUpdate&&!category?.image)||(!isUpdate)" src="../../../../assets/images/default-category.png" class="img-thumbnail m-2"
             style="width: 150px;">
           <img *ngIf="urlImage" [src]="urlImage" class="img-thumbnail" alt="category-image">
           <img *ngIf="isUpdate&&imageUpdate&&!urlImage" [src]="imageUpdate" class="img-thumbnail">
-          <label *ngIf="!urlImage&&!isUpdate">Not choose image</label>
-          <upload-image-entity [categoryName]="name.value" (shareURL)="onGiveUrl($event)"></upload-image-entity>
+          <label *ngIf="(!urlImage)&&(isUpdate&&!category?.image)||(!isUpdate)">Not choose image</label>
+          <upload-image-entity [name]="name.value" (shareURL)="onGiveUrl($event)"></upload-image-entity>
         </div>
         <div class="form-group form-check">
           <mat-checkbox formControlName="enabled">enabled</mat-checkbox>

@@ -5,6 +5,7 @@ import { BrandListComponent } from '../brand-list/brand-list.component';
 import { BrandUpdateComponent } from '../update/update.component';
 import { BrandDetailComponent } from '../detail/detail.component';
 import { CanActivationService } from 'src/app/core/auth/can-activation.service';
+import { BrandRoutingResolveService } from './brand-routing-resolve.service';
 
 const brandRoute: Routes = [
   {
@@ -24,12 +25,18 @@ const brandRoute: Routes = [
     component: BrandUpdateComponent,
     data: { title: 'brand edit' },
     canActivate: [CanActivationService],
+    resolve: {
+      brand: BrandRoutingResolveService,
+    },
   },
   {
     path: ':id/view',
     component: BrandDetailComponent,
     data: { title: 'brand view' },
     canActivate: [CanActivationService],
+    resolve: {
+      brand: BrandRoutingResolveService,
+    },
   },
   {
     path: ':id/delete',

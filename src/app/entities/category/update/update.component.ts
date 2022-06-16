@@ -28,6 +28,7 @@ export class CategoryUpdateComponent implements OnInit {
   imageUpdate: string | null = null;
   isUpdate = false;
   actionMessage = '';
+  updateCategory: ICategory | null = null;
 
   formEdit = this.fb.group({
     id: [],
@@ -53,6 +54,7 @@ export class CategoryUpdateComponent implements OnInit {
           this.actionMessage = `Update Category Id: ${this.category?.id}`;
           this.imageUpdate = this.category?.image as string;
           this.updateForm(category);
+
         } else {
           this.actionMessage = `Creation Category`;
         }
@@ -73,7 +75,7 @@ export class CategoryUpdateComponent implements OnInit {
 
     if (category.id) {
       this.categoryService.updateCategory(category).subscribe({
-        next: (response) => {
+        next: (response: HttpResponse<ICategory>) => {
           this.openSnackBar('updated successfully');
           this.onPrevious();
         },
@@ -95,6 +97,7 @@ export class CategoryUpdateComponent implements OnInit {
   }
 
   onGiveUrl(url: string | null): void {
+    this.isUpdate = true;
     this.urlImage = url;
   }
   openSnackBar(message: string) {

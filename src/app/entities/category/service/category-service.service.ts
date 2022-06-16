@@ -54,4 +54,10 @@ export class CategoryService {
       observe: 'response',
     });
   }
+
+  deleteCategory(id: number): Observable<HttpResponse<{}>> {
+    return this.http.delete(`${this.apiURL}/${id}`, {
+      observe: 'response',
+    });
+  }
 }

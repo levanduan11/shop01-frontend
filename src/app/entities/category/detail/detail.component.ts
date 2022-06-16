@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { CategoryDeleteComponent } from '../delete/delete.component';
 import { ICategory } from '../model/category.model';
+import { CategoryService } from '../service/category-service.service';
 
 @Component({
   selector: 'category-detail',
@@ -8,8 +11,12 @@ import { ICategory } from '../model/category.model';
   styleUrls: ['./detail.component.css'],
 })
 export class CategoryDetailComponent implements OnInit {
-  category: ICategory | null=null;
-  constructor(private activatedRoute:ActivatedRoute) {}
+  category: ICategory | null = null;
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private categoryService: CategoryService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe({
@@ -20,7 +27,11 @@ export class CategoryDetailComponent implements OnInit {
       },
     });
   }
-  onPrevious(): void{
+  onPrevious(): void {
     window.history.back();
+  }
+  onOpenDialog(category: ICategory | null): void {
+    const dialogRef = this.dialog.open(CategoryDeleteComponent);
+    dialogRef.componentInstance.category = category;
   }
 }

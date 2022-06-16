@@ -15,13 +15,14 @@ export class UploadImageEntityComponent implements OnInit {
   currentFile: File | null = null;
   ref!: AngularFireStorageReference;
   isLoading = false;
+  message = '';
 
   @Output() shareURL = new EventEmitter<string>();
-  @Input() categoryName = '';
+  @Input() name = '';
 
-  constructor(private fireStorage: AngularFireStorage) {}
+  constructor(private fireStorage: AngularFireStorage) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onFileChanged(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -34,20 +35,27 @@ export class UploadImageEntityComponent implements OnInit {
 
   private loadFile(): void {
     let id = Math.random().toString(33).substring(2);
-    if (this.categoryName) {
-      id = `${this.categoryName.replace(' ','_')}-${id}`;
+    if (this.name) {
+      id = `${this.name.replace(' ', '_')}-${id}`;
     }
     this.ref = this.fireStorage.ref(id);
 
     (async () => {
-      this.isLoading = true;
-      const snapShort = await this.ref.put(this.currentFile);
-      const getUrl = await snapShort.ref.getDownloadURL();
-      const url = await getUrl;
-      if (url) {
-        this.isLoading = false;
-        this.shareURL.emit(url);
+      try {
+        this.isLoading = true;
+        const snapShort = await this.ref.put(this.currentFile);
+        const getUrl = await snapShort.ref.getDownloadURL();
+        const url = await getUrl;
+        if (url) {
+          this.isLoading = false;
+          this.shareURL.emit(url);
+        }
+      } catch (error) {
+        this.message = 'upload avatar fail please try again !';
       }
+
     })();
   }
+
+
 }

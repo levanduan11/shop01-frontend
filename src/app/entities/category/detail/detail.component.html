@@ -71,7 +71,8 @@
         <div class="btn-group" role="group" aria-label="Basic example">
           <button [routerLink]="['/category',category?.id,'edit']" type="button" class="btn btn-secondary">edit</button>
           <button [style]="(!category?.hasChild)? 'cursor:pointer;':'cursor: not-allowed'"
-            [disabled]="category?.hasChild" type="button" class="btn btn-danger">
+            [disabled]="category?.hasChild" type="button" class="btn btn-danger"
+            (click)="onOpenDialog(category)">
 
             delete
           </button>
