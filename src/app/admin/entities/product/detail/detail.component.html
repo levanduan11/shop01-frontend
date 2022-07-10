@@ -1,0 +1,185 @@
+<h2 class="text-center text-secondary" mat-dialog-title>Product ID: {{product?.id}}</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-card>
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab label="overview">
+        <table class="table mt-4 table-striped table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>key</th>
+              <th>value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Name
+              </td>
+              <td>
+                {{product?.name}}
+              </td>
+            </tr>
+            <tr>
+              <td>Alias</td>
+              <td>
+                {{product?.name}}
+              </td>
+            </tr>
+            <tr>
+              <td>Category</td>
+              <td>
+                {{product?.category}}
+              </td>
+            </tr>
+            <tr>
+              <td>Brand</td>
+              <td>
+                {{product?.brand}}
+              </td>
+            </tr>
+            <tr>
+              <td>Enabled</td>
+              <td>
+                <div *ngIf="!product?.enabled">
+                  <mat-icon class="mat-18 text-danger">
+                    explore_off
+                  </mat-icon>
+                </div>
+                <div *ngIf="product?.enabled">
+                  <mat-icon class="mat-18 text-success">
+                    check_circle
+                  </mat-icon>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>In Stock</td>
+              <td>
+                <div *ngIf="!product?.inStock">
+                  <mat-icon class="mat-18 text-danger">
+                    hide_source
+                  </mat-icon>
+                </div>
+                <div *ngIf="product?.inStock">
+                  <mat-icon class="mat-18 text-success">
+                    check
+                  </mat-icon>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>cost</td>
+              <td>{{product?.cost}}</td>
+            </tr>
+            <tr>
+              <td>price</td>
+              <td>{{product?.price}}</td>
+            </tr>
+            <tr>
+              <td>discountPercent</td>
+              <td>{{product?.discountPercent}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-tab>
+
+      <mat-tab label="description">
+        <div class="mt-4">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                aria-controls="nav-home" aria-selected="true">Short Description</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                aria-controls="nav-profile" aria-selected="false">Full Description</a>
+
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <div  class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <p style="line-height: 30px;font-size: 1.1rem;" class="text-secondary mt-3">{{product?.shortDescription}}</p>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <p style="line-height: 30px;font-size: 1.1rem;" class="text-secondary mt-3">{{product?.fullDescription}}</p>
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </mat-tab>
+      <mat-tab label="image">
+        <div class="row mt-2 mb-2">
+          <div class="col-md-3">
+            <div class="card">
+              <img class="card-img-top" [src]="product?.mainImage" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">
+                  Main Image
+                </p>
+              </div>
+            </div>
+          </div>
+          <div *ngFor="let e of urlExtraImage" class="col-md-3">
+            <div class="card">
+              <img class="card-img-top" [src]="e" alt="Card image cap">
+              <div class="card-body">
+                <p class="card-text">
+                  Extra Image
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="detail">
+        <table class="table mt-4 table-striped table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>name</th>
+              <th>value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let de of details">
+              <td>{{de.name}}</td>
+              <td>{{de.value}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </mat-tab>
+      <mat-tab label="shipping">
+        <table class="table mt-4 table-striped table-bordered table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>key</th>
+              <th>value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Length</td>
+              <td>{{product?.length}}</td>
+            </tr>
+            <tr>
+              <td>Width</td>
+              <td>{{product?.width}}</td>
+            </tr>
+            <tr>
+              <td>Height</td>
+              <td>{{product?.height}}</td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td>{{product?.weight}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close> Close </button>
+</mat-dialog-actions>

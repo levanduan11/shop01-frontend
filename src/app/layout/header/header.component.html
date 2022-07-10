@@ -1,68 +1,61 @@
-<nav class="navbar navbar-expand-lg navbar-white shadow" style="background-color:#c25211;">
-  <a class="navbar-brand" routerLink="/">
-    <img style="width:55px ;" class="rounded-circle" src="../../../assets/images/logo.png">
-  </a>
-  <button class="navbar-toggler bg-dark d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
-    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavId">
+<div class="header-blue">
+  <div class="" style="padding:0 30px ;background-color: rgb(228, 223, 223);">
+    <div class="row">
+      <div class="col-lg-3"></div>
 
+      <div class="col-lg-6 " style="padding: 10px ;">
 
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
-      <li class="nav-item ">
-        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/user">User </a>
-      </li>
-      <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/customer">Customer </a>
-      </li>
-      <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/category">Category </a>
-      </li>
-      <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/brand">Brand </a>
-      </li>
-      <li class="nav-item">
-        <a [ngClass]=" checkLogin ? 'nav-link text-white':' nav-link disabled' " routerLink="/product">Product </a>
-      </li>
-
-
-
-
-
-    </ul>
-    <ul *ngIf="!checkLogin" class="navbar-nav" style="margin-right:100px ;">
-      <li class="nav-item dropdown">
-        <a class="nav-link text-white dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-         Account
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownId">
-          <a class="dropdown-item" routerLink="/login">Login</a>
-          <a class="dropdown-item" routerLink="/register">Register</a>
+        <div id="nav-search " style="margin-left: 50px;">
+          <form id="form-search" action="">
+            <div class="left">
+              <mat-card style="padding: 0px 10px;border-radius: 5px;">
+                <mat-form-field appearance="outline" style="width: 100%;margin-top: 15px;">
+                  <input #search matInput>
+                  <mat-icon class="text-secondary" style="cursor:pointer;font-size: 30px;" (click)="onSearch(search)"
+                    matSuffix>search</mat-icon>
+                </mat-form-field>
+              </mat-card>
+            </div>
+          </form>
         </div>
-      </li>
+      </div>
+      <div class="col-lg-3"></div>
+    </div>
 
-    </ul>
-    <ul *ngIf="checkLogin" class="navbar-nav" style="margin-right:100px ;">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" role="button"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{username}}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" matTooltip="change avatar" routerLink="/upload-image">
-            <img class="rounded" *ngIf="imageURL" style="width:50px ;" [src]="imageURL">
-          </a>
-
-          <a class="dropdown-item" routerLink="/profile" matTooltip="view info">
-            view info
-          </a>
-          <a class="dropdown-item" matTooltip="logout" (click)="onLogout($event)">
-            <mat-icon class="text-info"> logout </mat-icon>
-          </a>
-        </div>
-      </li>
-    </ul>
   </div>
-</nav>
+
+
+
+  <nav class="navbar navbar-dark navbar-expand-lg navigation-clean-search  shadow-lg"
+    style="background-color: rgb(53, 38, 38) ;">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['']">
+
+        <img src="../../../assets/images/logo-1.jpg" class=" rounded-circle" style="width:59px ;">
+        BOOT
+      </a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle
+          navigation</span><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navcol-1">
+        <ul class="nav navbar-nav mr-auto">
+          <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Link</a></li>
+
+          <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown"
+              aria-expanded="false" href="#">Dropdown </a>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" role="presentation" href="#">First
+                Item</a>
+
+              <a class="dropdown-item" role="presentation" href="#">Second Item</a>
+
+              <a class="dropdown-item" role="presentation" href="#">Third Item</a>
+            </div>
+          </li>
+        </ul>
+        <user-state></user-state>
+
+      </div>
+    </div>
+  </nav>
+
+</div>

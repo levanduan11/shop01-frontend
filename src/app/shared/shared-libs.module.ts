@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -31,10 +32,12 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { UploadImageEntityComponent } from '../entities/up-load/upload-image-entity/upload-image-entity.component';
+import { UploadImageEntityComponent } from '../admin/entities/up-load/upload-image-entity/upload-image-entity.component';
+import { NavImageComponent } from '../layout/nav-image/nav-image.component';
+
 
 @NgModule({
-  declarations: [UploadImageEntityComponent],
+  declarations: [UploadImageEntityComponent, NavImageComponent],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     MatProgressBarModule,
@@ -71,6 +74,8 @@ import { UploadImageEntityComponent } from '../entities/up-load/upload-image-ent
     MatStepperModule,
     MatSidenavModule,
     MatTabsModule,
+    MatExpansionModule,
+    NavImageComponent,
   ],
 })
 export class SharedLibsModule {}

@@ -1,0 +1,27 @@
+<span *ngIf="!isLogin" (click)="login()" class="navbar-text" style="cursor:pointer ;">
+  <a class="nav-link">Log In</a>
+</span>
+<a *ngIf="!isLogin" (click)="register()" class="btn btn-light action-button" role="button">
+  SIGN UP
+</a>
+
+    <ul *ngIf="isLogin" class="navbar-nav mr-right">
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+        {{account?.username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" [routerLink]="['/user','account','profile']">My Account</a>
+          <a class="dropdown-item" href="#">Order Item</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item"  href="" (click)="logout($event)">Logout</a>
+          <a [ngClass]="isAdmin?'dropdown-item':'d-none'" role="presentation" [routerLink]="['/admin']">Admin
+            Manager</a>
+
+        </div>
+      </li>
+      <li class="nav-item active">
+        <cart-state></cart-state>
+      </li>
+    </ul>

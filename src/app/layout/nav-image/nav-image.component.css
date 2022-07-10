@@ -1,0 +1,15 @@
+
+.hero{
+  background: linear-gradient(135deg, #172a74, #21a9af);
+  background-color: #184e8e;
+  padding: 70px;
+  font-family: "Source Sans Pro", sans-serif;
+  color: white;
+}
+.container-fluid{
+   background: linear-gradient(135deg, #172a74, #21a9af);
+  background-color: #184e8e;
+}
+.device{
+  width: 110px;
+}

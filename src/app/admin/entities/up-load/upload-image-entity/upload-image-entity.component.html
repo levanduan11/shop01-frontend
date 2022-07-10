@@ -1,0 +1,8 @@
+<div *ngIf="isLoading">
+  <p class="text-warning text-danger">please waiting for file up loading... </p>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div *ngIf="message" class="alert alert-danger text-center" role="alert">
+  <strong>{{message}}</strong>
+</div>
+<input  type="file" accept="image/png,image/jpeg"  class="form-control mt-3" (change)="onFileChanged($event)">

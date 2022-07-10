@@ -1,0 +1,45 @@
+
+
+<div class="container-fluid bg-light">
+  <div class="container p-3" style="min-height: 79vh;">
+    <h3 class="text-center text-secondary">Login Page</h3>
+    <mat-card style="width: 500px;margin: 0 auto; padding: 30px;">
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin1()" style="width: 400px;margin: 0 auto;">
+
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" name="username">
+          <mat-error *ngIf="errorHandle('username', 'required')">
+            username is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" name="password">
+          <mat-error *ngIf="errorHandle('password', 'required')">
+            password is required
+          </mat-error>
+
+        </mat-form-field>
+
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" name="rememberMe" formControlName="rememberMe">
+          <label class="form-check-label"> Remember Me </label>
+        </div>
+
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button [disabled]="!loginForm.valid" type="submit" matTooltip="login" class="btn btn-primary">
+            <mat-icon class="text-light">login</mat-icon>
+          </button>
+          <button type="button" (click)="onPre()" class="btn btn-danger">cancel</button>
+        </div>
+      </form>
+
+    </mat-card>
+
+  </div>
+
+</div>
+

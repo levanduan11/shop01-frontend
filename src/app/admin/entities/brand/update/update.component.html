@@ -1,0 +1,52 @@
+<div class="container-fluid bg-light p-4">
+  <div class="container p-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/admin" href="#">Home</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a routerLink="/admin/brand" href="#">list</a></li>
+        <li class="breadcrumb-item active" aria-current="page">update-create</li>
+      </ol>
+    </nav>
+    <mat-card style="width:500px ;margin: auto;">
+      <h3 class="text-center text-secondary">{{action}}</h3>
+      <form [formGroup]="editForm" action="" (submit)="onSubmit()" style="width:400px ;margin: auto;">
+        <input type="hidden" formControlName="id">
+
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Brand Name</mat-label>
+          <input #name matInput formControlName="name" name="name">
+          <mat-error *ngIf="errorHandling('name', 'required')">
+            Brand name is required
+          </mat-error>
+        </mat-form-field>
+        <div class="form-group">
+          <img *ngIf="!giveUrl" #logo src="../../../../assets/images/default-category.png" class="img-thumbnail m-2"
+            style="width: 150px;">
+          <img *ngIf="giveUrl" [src]="giveUrl" class="img-thumbnail m-2">
+          <label *ngIf="!giveUrl">Not choose image</label>
+          <upload-image-entity [name]="name.value" (shareURL)="onGiveUrl($event)"></upload-image-entity>
+        </div>
+
+        <div>
+          <mat-form-field appearance="fill">
+            <p>choose Category</p>
+            <select multiple matNativeControl formControlName="categories">
+              <option [value]="null">[No Choose]</option>
+              <option *ngFor="let ca of categories" [value]="ca.name?.replaceAll('-','')?.replaceAll('+','')">{{ca.name}}</option>
+            </select>
+          </mat-form-field>
+
+        </div>
+
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button [disabled]="!editForm.valid" type="submit" class="btn btn-primary">save</button>
+          <button type="button" (click)="onPrevious()" class="btn btn-danger">cancel</button>
+        </div>
+      </form>
+
+    </mat-card>
+
+
+  </div>
+</div>

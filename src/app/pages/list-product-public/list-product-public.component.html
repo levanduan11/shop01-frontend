@@ -1,0 +1,30 @@
+
+
+<div class="row">
+  <div *ngFor="let p of products" class="col-lg-3 p-4">
+    <div class="single-product">
+      <div class="product-f-image">
+        <img class="image" style="height: 250px;" [src]="p.mainImage" alt="">
+        <div class="product-hover">
+          <a style="cursor: pointer;" (click)="addToCart($event,p)" class="add-to-cart-link d-flex align-items-center justify-content-center ">
+            <mat-icon class="mat-18 ">shopping_cart</mat-icon>
+            <span>Add to cart</span>
+          </a>
+          <a [routerLink]="['/p',p.alias]" href=""
+            class="view-details-link d-flex align-items-center justify-content-center">
+            <mat-icon class="mat-18">visibility</mat-icon>
+            <span>See details</span>
+          </a>
+        </div>
+      </div>
+
+      <h6 class="mt-2"><a class="text-secondary" [routerLink]="['/p',p.alias]" href="">{{p.name}}</a></h6>
+
+      <div class="product-carousel-price">
+        <ins>{{p.price | currency:'USD'}}</ins> <del>$100.00</del>
+      </div>
+    </div>
+  </div>
+
+</div>
+

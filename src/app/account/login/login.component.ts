@@ -59,22 +59,24 @@ export class LoginComponent implements OnInit {
       const login = valueForm;
       this.authService.login(login).subscribe({
         next: (data: any) => {
-          if (data.Login_error) {
-            this.openSnackBar(
-              'Failed to sign in! Please check your credentials and try again.'
-            );
-          } else {
-            this.isLogined = true;
-            this.tokenService.setRefreshKey(data.refreshToken);
-            this.tokenService.setUsername(data.username);
-            this.tokenService.setTokeKey(data.accessToken);
-            this.openSnackBar(
-              'login successfully'
-            );
-            this.router
-              .navigate(['/home'])
-              .then(() => window.location.reload());
-          }
+          console.log(data);
+
+          // if (data.Login_error) {
+          //   this.openSnackBar(
+          //     'Failed to sign in! Please check your credentials and try again.'
+          //   );
+          // } else {
+          //   this.isLogined = true;
+          //   this.tokenService.setRefreshKey(data.refreshToken);
+          //   this.tokenService.setUsername(data.username);
+          //   this.tokenService.setTokeKey(data.accessToken);
+          //   this.openSnackBar(
+          //     'login successfully'
+          //   );
+          //   this.router
+          //     .navigate(['/home'])
+          //     .then(() => window.location.reload());
+          // }
         },
         error: (error) => {
           this.openSnackBar('server has error please try again !!!');

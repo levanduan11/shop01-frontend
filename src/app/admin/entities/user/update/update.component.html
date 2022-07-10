@@ -1,0 +1,107 @@
+<div class="container-fluid bg-light">
+  <div class="container p-4 ">
+    <mat-card class="bg-info " style="width:300px ;margin:20px auto;">
+      <h4 class="text-light text-center ">{{action}}</h4>
+    </mat-card>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/admin" href="#">Home</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a routerLink="/admin/user" href="#">list</a></li>
+        <li class="breadcrumb-item active" aria-current="page">update-create</li>
+      </ol>
+    </nav>
+    <mat-card style="width:500px ;margin: auto;">
+
+      <form [formGroup]="editForm" (submit)="onSubmit()" style="width:400px ;margin: auto;">
+        <input type="hidden" formControlName="id" name="id">
+
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" name="username">
+          <mat-error *ngIf="errorHandling('username', 'required')">
+            username is required
+          </mat-error>
+          <mat-error *ngIf="errorHandling('username', 'pattern')">
+            username invalid
+          </mat-error>
+          <mat-error *ngIf="errorHandling('username', 'minlength')">
+            length must be greater than 1 character
+          </mat-error>
+          <mat-error *ngIf="errorHandling('username', 'maxlength')">
+            length must be small 50 character
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" name="firstName">
+          <mat-error *ngIf="errorHandling('firstName', 'required')">
+            First Name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" name="lastName">
+          <mat-error *ngIf="errorHandling('lastName', 'required')">
+            Last Name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" name="email">
+          <mat-error *ngIf="errorHandling('email', 'required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="errorHandling('email', 'email')">
+            Email invalid
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field *ngIf="!isUpdate" appearance="outline" style="width: 400px;">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" name="password">
+          <mat-error *ngIf="errorHandling('password', 'required')">
+            password is required
+          </mat-error>
+          <mat-error *ngIf="errorHandling('password', 'minlength')">
+            password min length is 4 character
+          </mat-error>
+          <mat-error *ngIf="errorHandling('password', 'maxlength')">
+            password max length is 99 character
+          </mat-error>
+        </mat-form-field>
+
+
+        <div class="form-group form-check">
+          <mat-checkbox formControlName="activated">Activated</mat-checkbox>
+
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <p>Authorities</p>
+            <select multiple matNativeControl formControlName="authorities">
+              <option *ngFor="let au of authorities" [value]="au"> {{au}}</option>
+            </select>
+          </mat-form-field>
+        </div>
+
+        <div id="btn-group" class="btn-group" role="group" aria-label="Basic example">
+          <button [disabled]="!editForm.valid" mat-raised-button matTooltip="save" type="submit"
+            class="btn btn-danger">save</button>
+
+          <button mat-raised-button matTooltip="cancel" type="button" routerLink="/admin/user"
+            class="btn btn-warning">cancel</button>
+
+
+        </div>
+      </form>
+
+    </mat-card>
+
+
+  </div>
+
+
+</div>

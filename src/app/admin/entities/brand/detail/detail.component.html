@@ -1,0 +1,31 @@
+<div class="container-fluid bg-light p-4">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/admin" href="#">Home</a></li>
+    <li class="breadcrumb-item " aria-current="page"><a routerLink="/admin/brand" href="#">list</a></li>
+    <li class="breadcrumb-item active" aria-current="page">View</li>
+  </ol>
+</nav>
+  <div class="container p-4">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{brand?.id}}</mat-card-title>
+        <mat-card-subtitle>
+          <h3>{{brand?.name}}</h3>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="brand?.logo" alt="logo">
+      <mat-card-content>
+        <h5 class="text-secondary">category-list</h5>
+        <p *ngFor="let ca of brand?.categories">
+          <span class="badge badge-pill badge-light"> {{ca}} </span>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button [routerLink]="['/brand',brand?.id,'edit']" mat-button>edit</button>
+        <button (click)="onPre()" mat-button>back</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

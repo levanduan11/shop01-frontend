@@ -1,0 +1,29 @@
+<div class="container-fluid bg-light p-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['']" routerLinkActive="router-link-active" class="" href="#">Home
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        product page
+      </li>
+    </ol>
+  </nav>
+  <div class="container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Product</mat-card-title>
+        <mat-card-subtitle>list by brand</mat-card-subtitle>
+      </mat-card-header>
+      <app-list-product-public [products]="products"></app-list-product-public>
+      <div>
+        <mat-paginator [length]="totalItems" [pageSizeOptions]="[9, 19,39,99]" (page)="nextPage($event)"
+          aria-label="Select page">
+        </mat-paginator>
+      </div>
+    </mat-card>
+
+  </div>
+
+</div>

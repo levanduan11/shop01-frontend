@@ -1,0 +1,60 @@
+<div class="container-fluid bg-light p-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['']" routerLinkActive="router-link-active" class="" href="#">Home
+        </a>
+      </li>
+      <li *ngFor="let p of parents" class="breadcrumb-item active" aria-current="page">
+
+        <a (click)="onSubCategory($event,p.alias)" routerLinkActive="router-link-active" class="" href="#">{{p.name}}
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{category?.name}}
+      </li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-lg-3">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Category</mat-card-title>
+        </mat-card-header>
+        <mat-list class="ml-2">
+          <mat-list-item class="text-dark">{{category?.name}}</mat-list-item>
+        </mat-list>
+        <mat-list class="ml-4">
+          <mat-list-item *ngFor="let c of childNode">
+            <a class="text-secondary nav-link" (click)="onSubCategory($event,c.alias)" href="">{{c.name}}</a>
+          </mat-list-item>
+
+        </mat-list>
+      </mat-card>
+    </div>
+    <div class="col-lg-9" *ngIf="products">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>List product</mat-card-title>
+          <mat-card-subtitle>product</mat-card-subtitle>
+        </mat-card-header>
+        <div>
+            <app-list-product-public [products]="products"></app-list-product-public>
+          <div>
+            <mat-paginator [length]="totalItems" [pageSizeOptions]="[9, 19,39,99]" (page)="nextPage($event)"
+              aria-label="Select page">
+            </mat-paginator>
+          </div>
+
+        </div>
+
+      </mat-card>
+
+
+
+    </div>
+  </div>
+
+
+</div>

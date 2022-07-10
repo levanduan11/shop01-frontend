@@ -1,0 +1,62 @@
+<div class="container-fluid bg-light">
+
+  <div class="container p-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/admin" href="#">Home</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a routerLink="/admin/category" href="#">list</a></li>
+        <li class="breadcrumb-item active" aria-current="page">update-create</li>
+      </ol>
+    </nav>
+    <mat-card  style="width:500px ;margin: auto;">
+      <mat-card style="margin:10px auto;width: 400px;">
+        <h4 class="text-center text-secondary">{{actionMessage}}</h4>
+
+      </mat-card>
+
+      <form [formGroup]="formEdit" action="" (submit)="onSubmit()" style="width:400px ;margin: auto;">
+        <input type="hidden" formControlName="id">
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Category Name</mat-label>
+          <input #name matInput formControlName="name" name="name">
+          <mat-error *ngIf="errorHandling('name', 'required')">
+            Category name is required
+          </mat-error>
+
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 400px;">
+          <mat-label>Alias</mat-label>
+          <input matInput formControlName="alias" name="alias">
+        </mat-form-field>
+        <div class="form-group">
+          <img *ngIf="(!urlImage)&&(isUpdate&&!category?.image)||(!isUpdate)" src="../../../../assets/images/default-category.png" class="img-thumbnail m-2"
+            style="width: 150px;">
+          <img *ngIf="urlImage" [src]="urlImage" class="img-thumbnail" alt="category-image">
+          <img *ngIf="isUpdate&&imageUpdate&&!urlImage" [src]="imageUpdate" class="img-thumbnail">
+          <label *ngIf="(!urlImage)&&(isUpdate&&!category?.image)||(!isUpdate)">Not choose image</label>
+          <upload-image-entity [name]="name.value" (shareURL)="onGiveUrl($event)"></upload-image-entity>
+        </div>
+        <div class="form-group form-check">
+          <mat-checkbox formControlName="enabled">enabled</mat-checkbox>
+        </div>
+        <div>
+          <mat-form-field appearance="fill">
+            <p>choose parent</p>
+            <select matNativeControl formControlName="parent_id">
+              <option [value]="null">[No Choose]</option>
+              <option *ngFor="let ca of categoryForNews" [value]="ca?.id"> {{ca.name}}</option>
+            </select>
+          </mat-form-field>
+        </div>
+
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button [style]="(formEdit.valid)? 'cursor:pointer;':'cursor: not-allowed'" [disabled]="!formEdit.valid"
+            type="submit" class="btn btn-primary">save</button>
+          <button (click)="onPrevious()" type="button" class="btn btn-danger">cancel</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+
+</div>

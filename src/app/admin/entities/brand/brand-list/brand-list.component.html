@@ -1,0 +1,79 @@
+<div class="container-fluid bg-light p-4">
+
+  <div class="container p-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li  class="breadcrumb-item"><a routerLink="/admin" href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Brand</li>
+      </ol>
+    </nav>
+    <mat-card class="bg-light" style="width: 500px;margin: auto;">
+      <h3 class="text-center text-secondary">List Brand</h3>
+    </mat-card>
+    <button class="mb-2" [routerLink]="['new']" matTooltip="create brand" mat-raised-button color="light">
+      <mat-icon class="text-danger">add_circle</mat-icon>
+    </button>
+    <mat-card>
+
+      <div fxLayout fxLayoutAlign="center center">
+        <mat-form-field fxFlex="50%">
+          <input matInput type="search" (keyup)="doFilter($event)" placeholder="Search keyword">
+        </mat-form-field>
+      </div>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 table-striped table-hover"
+        (matSortChange)="announceSortChange(sort)">
+
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number"> ID. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="logo">
+          <th mat-header-cell *matHeaderCellDef> logo </th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="!element.logo"> No logo </span>
+            <img *ngIf="element.logo" [src]="element.logo" alt="" class="img-thumbnail m-2" style="width: 100px;">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categories">
+          <th class="text-center" mat-header-cell *matHeaderCellDef> categories </th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngFor="let ca of element.categories" class="badge badge-pill badge-light">{{ca}}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+              <mat-button-toggle [routerLink]="['./',element.id,'view']" matTooltip="View detail">
+                <mat-icon class="text-dark">visibility</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle [routerLink]="['./',element.id,'edit']" matTooltip="edit">
+                <mat-icon class="text-dark">edit</mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle (click)="onOpenDialog(element)" matTooltip="delete">
+                <mat-icon class="text-dark">delete</mat-icon>
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[7,17,27]" showFirstLastButtons aria-label="Select page of periodic elements">
+      </mat-paginator>
+
+    </mat-card>
+
+  </div>
+
+</div>

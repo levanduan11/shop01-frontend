@@ -1,0 +1,54 @@
+<div class="container p-4 bg-light" style="min-height: 78vh;">
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/admin" href="#">Home</a></li>
+    <li class="breadcrumb-item " aria-current="page"><a routerLink="/admin/user" href="#">list</a></li>
+    <li class="breadcrumb-item active" aria-current="page">View</li>
+  </ol>
+</nav>
+  <mat-card style="width: 500px; margin: auto;">
+    <h3 class="text-center text-primary shadow p-3 bg-info text-light">
+      Information Of User
+    </h3>
+    <table class="table table-borderless">
+      <tr>
+        <th>User Name:</th>
+        <td>{{user.username}}</td>
+      </tr>
+      <tr>
+        <th>First Name:</th>
+        <td>{{user.firstName}}</td>
+      </tr>
+      <tr>
+        <th>Last Name:</th>
+        <td>{{user.lastName}}</td>
+      </tr>
+      <tr>
+        <th>Email:</th>
+        <td>{{user.email}}</td>
+      </tr>
+      <tr>
+        <th>Activated:</th>
+        <td>
+          <div *ngIf="user.activated===true">
+            <mat-icon class="text-success" aria-hidden="false">thumb_up_off</mat-icon>
+          </div>
+          <div *ngIf="user.activated===false">
+            <mat-icon class="text-danger" aria-hidden="false">person_off</mat-icon>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>Created Date:</th>
+        <td>{{user.createdDate | date: 'dd/MM/YYYY HH:MM'}}</td>
+      </tr>
+      <tr>
+        <th>
+          <button (click)="prev()" mat-raised-button color="primary" > back </button>
+
+        </th>
+
+      </tr>
+    </table>
+  </mat-card>
+</div>

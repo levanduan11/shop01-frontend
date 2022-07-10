@@ -1,0 +1,43 @@
+<div class="container-fluid bg-light p-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['']" routerLinkActive="router-link-active" class="" href="#">Home
+        </a>
+      </li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <div class="col-lg-12">
+      <div class="text-center" *ngIf="isNotFound">
+        <h3 class="text-danger">
+          Not found product for keyword: "{{keyword}}"
+        </h3>
+      </div>
+      <div class="text-center" *ngIf="!isNotFound">
+        <h3 class="text-success">
+          Result for keyword: "{{keyword}}"
+        </h3>
+      </div>
+      <mat-card *ngIf="!isNotFound">
+        <mat-card-header>
+          <mat-card-title>List product</mat-card-title>
+          <mat-card-subtitle>product</mat-card-subtitle>
+        </mat-card-header>
+        <app-list-product-public *ngIf="!isNotFound" [products]="products"></app-list-product-public>
+        <div>
+          <!-- <mat-paginator *ngIf="!isNotFound" [length]="totalItems" [pageSizeOptions]="[1, 19,39,99]"
+            (page)="nextPage($event)" aria-label="Select page">
+          </mat-paginator> -->
+        </div>
+      </mat-card>
+
+
+
+    </div>
+  </div>
+
+
+</div>

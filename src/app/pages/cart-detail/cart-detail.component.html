@@ -1,0 +1,85 @@
+<div class="container-fluid p-4 bg-light">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['']" routerLinkActive="router-link-active" class="" href="#">Home
+        </a>
+      </li>
+    </ol>
+  </nav>
+  <mat-card class="p-4 text-secondary">
+      <h5>Your Shopping Cart</h5>
+  </mat-card>
+  <mat-card style="padding: 70px 0;background-color: rgb(174, 229, 187);" class="text-center" *ngIf="carts!.length===0">
+   <mat-card style="width: 500px;margin: auto;">
+       <mat-card-header>
+           <mat-card-title>Your Shopping Cart is empty.</mat-card-title>
+       </mat-card-header>
+       <img matCardImage src="../../../assets/images/empty-icon.png">
+
+   </mat-card>
+  </mat-card>
+  <div class="row">
+    <div class="col-lg-9">
+
+      <div class="row">
+        <div *ngFor="let ca of carts" class="col-md-12 mt-2">
+          <mat-card>
+            <div class="alert alert-warning  d-none" role="alert">
+              {{messageState}}
+            </div>
+            <div class="row err-ele">
+              <div class="col-md-2">
+                <img [src]="ca.imageUrl" class="img-thumbnail">
+              </div>
+              <div class="col-md-8">
+                <h6>{{ca.name}}</h6>
+                <p class="text-success">Free Shipping</p>
+                <div class="row">
+                  <div class="col-md-2">
+                    <label for="exampleFormControlSelect1">quantity</label>
+                    <select #selectE (change)="updateQuantity(selectE,ca)" style="width: 80px;" class="form-control">
+                      <option [ngValue]="ca.quantity">{{ca.quantity}}</option>
+                      <option *ngFor="let q of quantityOptions" [ngValue]="q">{{q}}</option>
+                    </select>
+                    <div class="gThan d-none">
+                      <input style="width:100px ;" #inputE min="1" [value]="ca.quantity" type="number" class="form-control">
+                      <button (click)="updateQuantity(inputE,ca)" class="text-primary" mat-button>update</button>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div style="margin-top: 35px;"></div>
+                    <button (click)="onDelete(ca)" class="text-danger" mat-button>Delete</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <h5>
+                  {{ca!.price*ca!.quantity | currency:'USD'}}
+                </h5>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="carts!.length>0" class="col-lg-3 mt-2">
+      <mat-card>
+        <div class="text-center" style="margin: auto;width: 290px;">
+          <div>
+            <h5>Total: <span class="ml-1 text-secondary">{{totalPrice|currency:'USD'}}</span></h5>
+            <h5>Quantity: <span class="ml-1 text-secondary">{{totalQuantity}}</span></h5>
+          </div>
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary">proceed to check out</button>
+
+          </mat-card-actions>
+
+        </div>
+
+      </mat-card>
+    </div>
+  </div>
+
+</div>

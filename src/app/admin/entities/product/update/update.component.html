@@ -1,0 +1,246 @@
+<div class="container-fluid bg-light p-4" style="min-height: 90vh;">
+  <div class="container p-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/admin" href="#">Home</a></li>
+        <li class="breadcrumb-item " aria-current="page"><a routerLink="/admin/product" href="#">list</a></li>
+        <li class="breadcrumb-item active" aria-current="page">update-create</li>
+      </ol>
+    </nav>
+    <mat-card>
+      <h3 class="text-center text-secondary">{{action}}</h3>
+    </mat-card>
+    <form (submit)="onSubmit()">
+      <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+      </button> -->
+      <mat-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="overview">
+          <form [formGroup]="overview">
+            <input type="hidden" formControlName="id">
+            <ng-template matStepLabel>overview</ng-template>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>name</mat-label>
+                  <input matInput formControlName="name" name="name">
+                  <mat-error *ngIf="errorHandlingOverview('name', 'required',overview)">
+                    name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>alias</mat-label>
+                  <input matInput formControlName="alias" name="alias">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                  <mat-label>Brand</mat-label>
+                  <select (change)="onChange(overview.get('brand')?.value)" matNativeControl formControlName="brand">
+                    <option #brand *ngFor="let b of brands" [value]="b.name"> {{b.name}}</option>
+                  </select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                  <mat-label>Category</mat-label>
+                  <select matNativeControl formControlName="category">
+
+                    <option *ngFor="let c of categories" [value]="c"> {{c}}</option>
+                  </select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-12">
+                <section class="example-section">
+                  <mat-checkbox formControlName="enabled" class="example-margin">Enabled:</mat-checkbox>
+                </section>
+              </div>
+              <div class="col-md-12">
+                <section class="example-section">
+                  <mat-checkbox formControlName="inStock" class="example-margin">In Stock</mat-checkbox>
+                </section>
+              </div>
+
+              <div class="col-md-4">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>cost</mat-label>
+                  <input matInput formControlName="cost" name="cost">
+                  <mat-error *ngIf="errorHandlingOverview('cost', 'pattern',overview)">
+                    input invalid
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>price</mat-label>
+                  <input matInput formControlName="price" name="price">
+                  <mat-error *ngIf="errorHandlingOverview('price', 'pattern',overview)">
+                    input invalid
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Discount Percent</mat-label>
+                  <input matInput formControlName="discountPercent" name="discountPercent">
+                  <mat-error *ngIf="errorHandlingOverview('discountPercent', 'pattern',overview)">
+                    input invalid
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+            <div>
+              <button (click)="onPrevious()" mat-raised-button color="warn" type="button">cancel</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="description" label=" Description">
+          <form [formGroup]="description">
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field style="width: 100%;" class="example-full-width" appearance="fill">
+                  <mat-label>Short Description</mat-label>
+                  <textarea  rows="7" cols="50" matInput placeholder="short description" style="line-height: 30px;font-size: 1.1rem;" class="text-secondary" formControlName="shortDescription"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-md-12">
+                <mat-form-field style="width: 100%;" class="example-full-width" appearance="fill">
+                  <mat-label>Full Description</mat-label>
+                  <textarea rows="9" cols="50" matInput placeholder="full description" formControlName="fullDescription"  style="line-height: 30px;font-size: 1.1rem;" class="text-secondary" ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div>
+              <button (click)="onPrevious()" mat-raised-button color="warn" type="button">cancel</button>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="description" label="Image">
+          <form [formGroup]="image">
+            <div class="row" id="row">
+              <div class="col-md-3" id="main-image">
+                <div class="card">
+                  <img *ngIf="!mainImage" class="card-img-top" src="../../../../assets/images/default-category.png">
+                  <img *ngIf="mainImage" [src]="mainImage" class="card-img-top">
+                  <div class="card-body">
+                    <label>Main image</label>
+                    <upload-image-entity (shareURL)="getMainImageUrl($event)"></upload-image-entity>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-3" id="extra-image">
+                <div class="card">
+                  <img class="card-img-top" src="../../../../assets/images/default-category.png">
+                  <div class="card-body">
+                    <label>Extra image</label>
+                    <upload-image-entity (shareURL)="getExtraImageUrl($event)"></upload-image-entity>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button (click)="onPrevious()" mat-raised-button color="warn" type="button">cancel</button>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="description" label="Details">
+          <form [formGroup]="detail" id="detail">
+            <div class="form-row mt-3" id="first-detail">
+
+              <div class="col">
+                <input #name1 type="text" class="form-control" placeholder="name">
+              </div>
+              <div class="col">
+                <input #value1 type="text" class="form-control" placeholder="value">
+              </div>
+            </div>
+            <button (click)="onAddDetail(name1,value1)" type="button" class="btn btn-danger m-4">add</button>
+            <div>
+              <button (click)="onPrevious()" mat-raised-button color="warn" type="button">cancel</button>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+
+        <mat-step [stepControl]="description" label="Shipping">
+          <form [formGroup]="shipping">
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>length</mat-label>
+                  <input matInput formControlName="length" name="length">
+
+                  <mat-error *ngIf="errorHandlingOverview('length', 'pattern',shipping)">
+                    input invalid
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>width</mat-label>
+                  <input matInput formControlName="width" name="width">
+                  <mat-error *ngIf="errorHandlingOverview('width', 'pattern',shipping)">
+                    input invalid
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>height</mat-label>
+                  <input matInput formControlName="height" name="height">
+                  <mat-error *ngIf="errorHandlingOverview('height', 'pattern',shipping)">
+                    input invalid
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>weight</mat-label>
+                  <input matInput formControlName="weight" name="weight">
+                  <mat-error *ngIf="errorHandlingOverview('weight', 'pattern',shipping)">
+                    input invalid
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div>
+              <button (click)="onPrevious()" mat-raised-button color="warn" type="button">cancel</button>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button type="button" mat-button (click)="stepper.reset()">Reset</button>
+            <button type="submit" mat-raised-button class="mr-3" color="primary">save</button>
+            <button (click)="onPrevious()" mat-raised-button color="warn" type="button">cancel</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </form>
+  </div>
+</div>
