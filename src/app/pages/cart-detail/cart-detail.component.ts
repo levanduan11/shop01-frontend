@@ -76,15 +76,23 @@ export class CartDetailComponent implements OnInit {
     element: HTMLSelectElement | HTMLInputElement,
     cart: ICartItem
   ): void {
+
+
     this.updateFail = false;
     element.disabled = true;
     const value = element.value;
     if (value === '10+') {
       const qThan = element.nextElementSibling;
       qThan?.classList.remove('d-none');
+
       element.style.display = 'none';
       return;
     }
+    if (parseInt(value) === 0) {
+      this.onDelete(cart);
+      return;
+
+     }
     const quantity = parseInt(value) as number;
     const productId = cart.productId;
     const customerId = cart.customerId;

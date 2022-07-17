@@ -43,7 +43,7 @@
                       <option *ngFor="let q of quantityOptions" [ngValue]="q">{{q}}</option>
                     </select>
                     <div class="gThan d-none">
-                      <input style="width:100px ;" #inputE min="1" [value]="ca.quantity" type="number" class="form-control">
+                      <input  style="width:100px ;" #inputE min="1" [value]="ca.quantity" type="number" class="form-control i">
                       <button (click)="updateQuantity(inputE,ca)" class="text-primary" mat-button>update</button>
                     </div>
                   </div>

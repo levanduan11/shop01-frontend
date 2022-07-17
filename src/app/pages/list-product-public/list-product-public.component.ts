@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/login/login.service';
 import { ICartItem } from '../model/cart';
 import { SnackBarService } from 'src/app/shared/alert/snack-bar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-product-public',
@@ -45,7 +46,9 @@ export class ListProductPublicComponent implements OnInit {
   }
   addCart(p: IProduct, customer: Account) {
     if (!p.inStock) {
-      this.snack.openSnackBar('this item not available please choose other item');
+      this.snack.openSnackBar(
+        'this item not available please choose other item'
+      );
       return;
     }
     const cart = this.createCartItem(p, customer);
@@ -53,8 +56,12 @@ export class ListProductPublicComponent implements OnInit {
       next: () => {
         this.snack.openSnackBar('1 item have been added to your cart');
       },
-      error: () => {
-        this.snack.openSnackBar('add to cart fail!');
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 400 && err.error.type === 'quantity_not_available') {
+          this.snack.openSnackBar(err.error.message);
+        } else {
+          this.snack.openSnackBar('add to cart fail!');
+        }
       },
     });
   }
@@ -69,4 +76,5 @@ export class ListProductPublicComponent implements OnInit {
       productId: p.id!,
     };
   }
+
 }

@@ -59,4 +59,5 @@ export class PublicBrandComponent implements OnInit {
     this.totalItems = body.totalElements;
     this.products = body.content ?? [];
   }
+ 
 }

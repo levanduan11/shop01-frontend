@@ -1,0 +1,57 @@
+<div class="container-fluid bg-light p-4">
+  <div class="container p-4">
+    <mat-card class="p-4 text-secondary">
+      <div class="" style="width: 500px;margin: auto;">
+        <h4 class="mb-3">Reset your password</h4>
+        <div class="alert alert-primary" role="alert" *ngIf="message&&success">
+          <strong>{{message}}</strong>
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="!success&&message">
+          <strong>{{message}} </strong>
+        </div>
+        <form [formGroup]="passwordForm" (submit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field appearance="outline" style="width: 400px;">
+                <mat-label>New Password</mat-label>
+                <input type="password" matInput formControlName="newPassword" name="newPassword">
+                <mat-error *ngIf="errorHandling('newPassword', 'required')">
+                  New Password is required
+                </mat-error>
+                <mat-error *ngIf="errorHandling('newPassword', 'minlength')">
+                  New Password minlength is 6 character
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+              <mat-form-field appearance="outline" style="width: 400px;">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" #confirm matInput formControlName="confirmPassword" name="confirmPassword">
+                <mat-error *ngIf="errorHandling('confirmPassword', 'required')">
+                  Confirm Password is required
+                </mat-error>
+                <mat-error *ngIf="errorHandling('confirmPassword', 'minlength')">
+                  Confirm Password minlength is 6 character
+                </mat-error>
+              </mat-form-field>
+              <div *ngIf="notMatch" class="alert alert-danger" role="alert">
+                <strong>Password none match</strong>
+              </div>
+
+            </div>
+            <div class="col-md-12">
+              <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+                <button mat-button type="submit" mat-raised-button color="primary" [disabled]="!passwordForm.valid"
+                  [matTooltip]=" passwordForm.valid?'save':''">Reset</button>
+
+                <mat-button-toggle (click)="onPre()" matTooltip="cancel" value="green">Cancel</mat-button-toggle>
+
+              </mat-button-toggle-group>
+              <a [routerLink]="['/login']" *ngIf="success" href="" class="ml-3">login now</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>

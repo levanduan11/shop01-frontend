@@ -14,10 +14,9 @@ import { SnackBarService } from '../../shared/alert/snack-bar.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
- 
+
 
   constructor(
-
     private router: Router,
     public dialog: MatDialog,
     private snack: SnackBarService

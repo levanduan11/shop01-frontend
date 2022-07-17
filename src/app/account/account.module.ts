@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { accountRoutes } from './account-route.routing';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from '../user/account/register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
@@ -12,7 +12,6 @@ import { UploadImageComponent } from './upload/upload-image/upload-image.compone
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent,
     ProfileComponent,
     UploadImageComponent,
   ],

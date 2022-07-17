@@ -8,11 +8,7 @@ import { PageNotFoundComponent } from './errors/page-not-found/page-not-found.co
 const routes: Routes = [
 
 
-  {
-    path: 'account',
-    loadChildren: () =>
-      import('./account/account.module').then((m) => m.AccountModule),
-  },
+
   {
     path: '',
     loadChildren: () =>

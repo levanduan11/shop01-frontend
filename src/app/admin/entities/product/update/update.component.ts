@@ -29,6 +29,7 @@ export class ProductUpdateComponent implements OnInit {
     category: [],
     enabled: [false],
     inStock: [false],
+    unitsInStock: [0],
     cost: [0.0, Validators.pattern('^((-)?(0|([1-9][0-9]*))(.[0-9]+)?)$')],
     price: [0.0, Validators.pattern('^((-)?(0|([1-9][0-9]*))(.[0-9]+)?)$')],
     discountPercent: [
@@ -154,6 +155,7 @@ export class ProductUpdateComponent implements OnInit {
       brand: this.overview.get('brand')?.value,
       enabled: this.overview.get('enabled')?.value,
       inStock: this.overview.get('inStock')?.value,
+      unitsInStock: this.overview.get('unitsInStock')?.value,
       cost: this.overview.get('cost')?.value,
       price: this.overview.get('price')?.value,
       discountPercent: this.overview.get('discountPercent')?.value,
@@ -175,6 +177,7 @@ export class ProductUpdateComponent implements OnInit {
       category: product.category,
       enabled: product.enabled,
       inStock: product.inStock,
+      unitsInStock:product.unitsInStock,
       cost: product.cost,
       price: product.price,
       discountPercent: product.discountPercent,

@@ -13,8 +13,13 @@
       <li class="breadcrumb-item active" aria-current="page">
         product
       </li>
+
+
     </ol>
   </nav>
+  <a href="#" (click)="onBack($event)" class="badge badge-dark mb-3" style="width: 50px;">
+    <mat-icon class="mat-18">arrow_back</mat-icon>
+  </a>
   <mat-card>
     <div id="alert-message" class="alert alert-warning  d-none" role="alert">
       {{messageState}}
@@ -85,14 +90,15 @@
                   <div class="row">
                     <div class="col-lg-12">
                       <label for="exampleFormControlSelect1">quantity</label>
-                      <select #selectE (change)="onChange(selectE,inputE)"  style="width: 80px;" class="form-control">
+                      <select #selectE (change)="onChange(selectE,inputE)" style="width: 80px;" class="form-control">
                         <option *ngFor="let q of quantityOptions" [ngValue]="q">{{q}}</option>
                       </select>
-                      <input style="width: 90px;" min="1" value="1"  #inputE type="number" class="form-control d-none">
+                      <input style="width: 90px;" min="1" value="1" #inputE type="number" class="form-control d-none">
 
                     </div>
                     <div class="col-lg-12 mt-2">
-                      <button (click)="onAddToCart(selectE,inputE,product)" type="button" class="btn btn-outline-primary">Add to
+                      <button (click)="onAddToCart(selectE,inputE,product)" type="button"
+                        class="btn btn-outline-primary">Add to
                         Cart</button>
 
                     </div>
@@ -195,10 +201,10 @@
           </ol>
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="d-block w-100 " [src]="product?.mainImage" alt="First slide">
+              <img class="d-block w-100 " [src]="product?.mainImage" alt="First slide" style="height: 500px;">
             </div>
             <div class="carousel-item" *ngFor="let im of extraImages">
-              <img class="d-block w-100 " [src]="im.name" alt="Second slide">
+              <img class="d-block w-100 " [src]="im.name" alt="Second slide" style="height: 500px;">
             </div>
 
           </div>

@@ -44,6 +44,8 @@ export class SearchComponent implements OnInit {
     this.isLoading = true;
     this.publicProductService.search(req).subscribe({
       next: (data: HttpResponse<IProduct[]>) => {
+        console.log(data);
+
         this.onSuccess(data.body);
         this.isLoading = false;
       },

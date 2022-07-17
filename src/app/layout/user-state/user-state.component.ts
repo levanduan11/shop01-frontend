@@ -19,23 +19,26 @@ export class UserStateComponent implements OnInit {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private accountService: AccountService,
-
+    private accountService: AccountService
   ) {}
 
   ngOnInit() {
     this.isLogin = false;
     this.isAdmin = false;
     this.accountService.getUser().subscribe({
-      next: (user:Account|null) => {
+      next: (user: Account | null) => {
         if (user) {
           this.isLogin = true;
           this.account = user;
-          this.isAdmin = user.authorities.includes(Authority.ADMIN);
         }
       },
     });
 
+    this.accountService.isRoleAdmin().subscribe({
+      next: (data) => {
+        this.isAdmin = data;
+      },
+    });
   }
 
   login(): void {
@@ -47,6 +50,6 @@ export class UserStateComponent implements OnInit {
     this.router.navigate(['']).then(() => window.location.reload());
   }
   register(): void {
-    this.router.navigate(['account/register']);
+    this.router.navigate(['user/account/register']);
   }
 }

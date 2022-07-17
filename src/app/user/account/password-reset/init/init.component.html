@@ -1,0 +1,34 @@
+<div class="container-fluid bg-light p-4">
+  <div class="container p-4">
+    <mat-card style="min-height: 70vh;padding: 40px;">
+      <div style="width: 500px;margin: auto;">
+        <h5 *ngIf="!message" class="text-center text-secondary mb-3">Please enter your email</h5>
+        <div *ngIf="success&&message" class="alert alert-primary text-center" role="alert">
+          <strong>{{message}}</strong>
+        </div>
+        <div *ngIf="!success&&message" class="alert alert-danger text-center" role="alert">
+          <strong>{{message}}</strong>
+        </div>
+        <form [formGroup]="passwordInitForm" (submit)="onSubmit()">
+          <mat-form-field appearance="outline" style="width: 500px;margin: auto;">
+            <mat-label>Email</mat-label>
+            <input #email matInput formControlName="email" name="email">
+            <mat-error *ngIf="errorHandling('email', 'required')">
+              Email is required
+            </mat-error>
+            <mat-error *ngIf="errorHandling('email', 'email')">
+              Email invalid
+            </mat-error>
+          </mat-form-field>
+          <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+            <button mat-button type="submit" mat-raised-button color="primary" [disabled]="!passwordInitForm.valid">send
+              email</button>
+
+            <mat-button-toggle (click)="onPre()" matTooltip="cancel" value="green">Cancel</mat-button-toggle>
+
+          </mat-button-toggle-group>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>

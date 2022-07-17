@@ -6,11 +6,14 @@ import {
   shareReplay,
   catchError,
   of,
+  Subject,
 } from 'rxjs';
 import { Account } from './account.model';
 import { environment } from '../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { Authority } from '../../admin/cofig/authority.constant';
+import { AuthServerProvider } from './auth-jwt.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,22 +26,36 @@ export class AccountService {
   private resourceServe = environment.API_LOCAL;
   private userState: BehaviorSubject<Account | null> =
     new BehaviorSubject<Account | null>(null);
+  private isAdmin = new Subject<boolean>();
+  private isUser = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) {}
+  constructor(private auth: AuthServerProvider, private http: HttpClient) {}
 
   save(account: Account): Observable<{}> {
     return this.http.post(`${this.resourceServe}account`, account);
   }
 
-  getUser(): Observable<Account | null>{
-
-    this.fetch().subscribe({
-      next: (data) => {
-        this.userIdentity = data;
-        this.userState.next(data);
-      }
-    })
+  getUser(): Observable<Account | null> {
+    const token = this.auth.getToken();
+    if (token) {
+      this.fetch().subscribe({
+        next: (data: Account) => {
+          if (data) {
+            this.userIdentity = data;
+            this.userState.next(data);
+            const admin: boolean = data.authorities.includes(Authority.ADMIN);
+            const user: boolean = data.authorities.includes(Authority.USER);
+            this.isAdmin.next(admin);
+            this.isUser.next(user);
+          }
+        },
+      });
+    }
     return this.userState.asObservable();
+  }
+
+  isRoleAdmin(): Observable<boolean> {
+    return this.isAdmin.asObservable();
   }
 
   authenticate(identity: Account | null): void {

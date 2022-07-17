@@ -11,6 +11,7 @@ export interface IProduct {
   brand?: string;
   enabled?: boolean;
   inStock?: boolean;
+  unitsInStock?: number;
   cost?: number;
   price?: number;
   discountPercent?: number;
@@ -33,6 +34,7 @@ export class Product implements IProduct {
     public brand?: string,
     public enabled?: boolean,
     public inStock?: boolean,
+    public unitsInStock?: number,
     public cost?: number,
     public price?: number,
     public discountPercent?: number,
@@ -42,7 +44,7 @@ export class Product implements IProduct {
     public weight?: number,
     public imageDTOS?: IProductImage[],
     public detailDTOS?: IProductDetail[]
-  ) { }
+  ) {}
 }
 
 export function getProductIdentifier(product: IProduct): number | undefined {

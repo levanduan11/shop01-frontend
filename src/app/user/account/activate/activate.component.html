@@ -1,0 +1,15 @@
+<div class="container-fluid p-4 bg-light" style="min-height: 70vh;">
+  <div class="container">
+    <mat-card class="" style="min-height: 50vh;">
+      <div  *ngIf="success">
+        <div class="alert text-center alert-primary" role="alert">
+          <strong>Your  account has been activated</strong>
+        </div>
+        <a href="" [routerLink]="['/login']">Login For Now</a>
+      </div>
+      <div *ngIf="error" class="alert text-center alert-danger" role="alert">
+        <strong>Your  could not be activated.</strong>
+      </div>
+    </mat-card>
+  </div>
+</div>

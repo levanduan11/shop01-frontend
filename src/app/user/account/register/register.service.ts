@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment.prod';
 import { Registration } from './register.model';
 import { Observable } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RegisterService {
-  baseUrl = environment.API_LOCAL + 'register';
+ private baseUrl = environment.API_LOCAL + 'register';
 
   constructor(private http: HttpClient) { }
 

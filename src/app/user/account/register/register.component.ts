@@ -13,7 +13,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { RegisterService } from './register.service';
-import { SnackBarService } from '../../shared/alert/snack-bar.service';
+import { SnackBarService } from '../../../shared/alert/snack-bar.service';
 import { Router } from '@angular/router';
 
 export const passwordMatchValidator: ValidatorFn = (
@@ -30,8 +30,8 @@ export const passwordMatchValidator: ValidatorFn = (
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-  successMessage = '';
   notMatch = false;
+  success = false;
 
   formRegister = this.fb.group({
     username: [
@@ -46,15 +46,18 @@ export class RegisterComponent implements OnInit {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(4)]],
-    confirmPassword: ['', [Validators.required, passwordMatchValidator]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: [
+      '',
+      [Validators.required, passwordMatchValidator, Validators.minLength(6)],
+    ],
   });
 
   constructor(
     private fb: FormBuilder,
     private registerService: RegisterService,
     private snack: SnackBarService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -76,8 +79,8 @@ export class RegisterComponent implements OnInit {
       })
       .subscribe({
         next: () => {
+          this.success = true;
           this.snack.openSnackBar('register successfully !');
-          this.router.navigate(['']);
         },
         error: (err: HttpErrorResponse) => {
           this.errorResponse(err);

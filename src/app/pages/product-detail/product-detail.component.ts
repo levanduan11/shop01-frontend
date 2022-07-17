@@ -8,7 +8,6 @@ import { ICategoryParent } from 'src/app/admin/entities/category/model/category-
 import { PublicCategoryService } from '../public-service/public-category.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { CartService } from '../public-service/cart.service';
-import { ICartItem } from '../model/cart';
 import { Account } from '../../core/auth/account.model';
 import { AccountService } from '../../core/auth/account.service';
 
@@ -38,10 +37,6 @@ export class ProductViewDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    for (let i = 1; i <= 9; i++) {
-      this.quantityOptions.push(i);
-    }
-    this.quantityOptions.push('10+');
     this.routeSnap.data.subscribe({
       next: ({ product }) => {
         this.product = product;
@@ -50,6 +45,9 @@ export class ProductViewDetailComponent implements OnInit {
           this.details = this.product.detailDTOS ?? [];
           if (this.product.category) {
             this.findAllParent(this.product.category);
+          }
+          for (let i = 1; i <= this.product.unitsInStock!; i++) {
+            this.quantityOptions.push(i);
           }
         }
       },
@@ -111,6 +109,7 @@ export class ProductViewDetailComponent implements OnInit {
       customerId: this.currentUser?.id,
       productId: product?.id!,
     };
+
     this.carService.addToCart(cartItem).subscribe({
       next: () => {
         this.snack.openSnackBar(`${value} item was added to cart`);
@@ -135,5 +134,9 @@ export class ProductViewDetailComponent implements OnInit {
       select.style.display = 'none';
       input.classList.remove('d-none');
     }
+  }
+  onBack(event: Event): void {
+    event.preventDefault();
+    window.history.go(-1);
   }
 }

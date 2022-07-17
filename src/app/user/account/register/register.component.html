@@ -1,0 +1,95 @@
+<div class="container-fluid bg-light">
+  <div class="container p-4">
+    <h3 class="text-center text-secondary">Register Form</h3>
+
+    <mat-card style="width: 500px;margin: 0 auto;padding: 30px;">
+      <mat-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="formRegister">
+          <form [formGroup]="formRegister" (submit)="onSubmit()">
+            <ng-template matStepLabel>Register</ng-template>
+            <mat-form-field appearance="outline" style="width: 400px;">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="username" name="username">
+              <mat-error *ngIf="errorFiled('username', 'required')">
+                username is required
+              </mat-error>
+              <mat-error *ngIf="errorFiled('username', 'pattern')">
+                username invalid
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 400px;">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" name="firstName">
+              <mat-error *ngIf="errorFiled('firstName', 'required')">
+                firstName is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 400px;">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" name="lastName">
+              <mat-error *ngIf="errorFiled('lastName', 'required')">
+                Last Name is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 400px;">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" name="email">
+              <mat-error *ngIf="errorFiled('email', 'required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="errorFiled('email', 'email')">
+                Email invalid
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 400px;">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput formControlName="password" name="password">
+              <mat-error *ngIf="errorFiled('password', 'required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="errorFiled('password', 'minlength')">
+                Password minlength is 6 character
+              </mat-error>
+            </mat-form-field>
+            <small class="text-danger" id="pass-not-match-err"></small>
+            <mat-form-field appearance="outline" style="width: 400px;">
+              <mat-label>Confirm Password</mat-label>
+              <input type="password" #confirm matInput formControlName="confirmPassword" name="confirmPassword"
+                (blur)="onInput(confirm)">
+              <mat-error *ngIf="errorFiled('confirmPassword', 'required')">
+                Confirm Password is required
+              </mat-error>
+              <mat-error *ngIf="errorFiled('confirmPassword', 'minlength')">
+                Password minlength is 6 character
+              </mat-error>
+            </mat-form-field>
+            <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+              <button mat-button matStepperNext type="submit" mat-raised-button color="primary"
+                [disabled]="!formRegister.valid" [matTooltip]=" formRegister.valid?'register':''">Register</button>
+
+              <mat-button-toggle (click)="onPre()" matTooltip="cancel" value="green">Cancel</mat-button-toggle>
+
+            </mat-button-toggle-group>
+
+          </form>
+
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>confirm</ng-template>
+          <div *ngIf="success" class="alert alert-primary text-center" role="alert">
+            <strong>Please check your email for confirmation.</strong>
+          </div>
+          <div *ngIf="!success" class="alert alert-danger text-center" role="alert">
+            <strong>could not register.</strong>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Back to register</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </mat-card>
+
+  </div>
+</div>
